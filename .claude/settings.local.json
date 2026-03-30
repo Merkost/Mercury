@@ -1,0 +1,38 @@
+{
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(grep:*)",
+      "WebSearch",
+      "WebFetch(domain:android.googlesource.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(./gradlew :foundations:compileDebugKotlin :components:compileDebugKotlin)",
+      "Bash(xargs cat:*)",
+      "Bash(find /Users/merkost/AndroidStudioProjects/Carthage -path \"*build\" -prune -o -name \"*.kt\" -type f -exec grep -l \"animation\\\\|Animation\" {})",
+      "Bash(for f:*)",
+      "Bash(do cp:*)",
+      "Bash(done)",
+      "Bash(cp AppUiItem.kt Dock.kt /Users/merkost/AndroidStudioProjects/Carthage/components/src/commonMain/kotlin/com/sleke/carthage/components/)",
+      "Bash(cp button/*.kt /Users/merkost/AndroidStudioProjects/Carthage/components/src/commonMain/kotlin/com/sleke/carthage/components/button/)",
+      "Bash(cp input/*.kt /Users/merkost/AndroidStudioProjects/Carthage/components/src/commonMain/kotlin/com/sleke/carthage/components/input/)",
+      "Bash(cp list/*.kt /Users/merkost/AndroidStudioProjects/Carthage/components/src/commonMain/kotlin/com/sleke/carthage/components/list/)",
+      "Bash(cp menu/*.kt /Users/merkost/AndroidStudioProjects/Carthage/components/src/commonMain/kotlin/com/sleke/carthage/components/menu/)",
+      "Bash(./gradlew :foundations:compileKotlinAndroid)",
+      "Bash(find /Users/merkost/AndroidStudioProjects/Carthage/gallery -type f \\\\\\(-name *.xml -o -path */res/* \\\\\\))",
+      "Bash(find /Users/merkost/AndroidStudioProjects/Carthage/app/src -name *.kt)",
+      "Bash(cp components/GalleryScaffold.kt components/SectionTitle.kt /Users/merkost/AndroidStudioProjects/Carthage/gallery/shared/src/commonMain/kotlin/com/sleke/carthage/gallery/components/)",
+      "Bash(cp navigation/DesignSystemNavHost.kt /Users/merkost/AndroidStudioProjects/Carthage/gallery/shared/src/commonMain/kotlin/com/sleke/carthage/gallery/navigation/)",
+      "Bash(cp screens/colors/ColorsShowcaseScreen.kt /Users/merkost/AndroidStudioProjects/Carthage/gallery/shared/src/commonMain/kotlin/com/sleke/carthage/gallery/screens/colors/)",
+      "Bash(cp screens/typography/TypographyShowcaseScreen.kt /Users/merkost/AndroidStudioProjects/Carthage/gallery/shared/src/commonMain/kotlin/com/sleke/carthage/gallery/screens/typography/)",
+      "Bash(cp screens/spacing/SpacingShowcaseScreen.kt /Users/merkost/AndroidStudioProjects/Carthage/gallery/shared/src/commonMain/kotlin/com/sleke/carthage/gallery/screens/spacing/)",
+      "Bash(find . -name \"*.kt\" -exec sed -i '' -e 's|import androidx.compose.ui.res.stringResource|import org.jetbrains.compose.resources.stringResource|g' -e 's|import com.sleke.carthage.gallery.R|import carthage.gallery.shared.generated.resources.Res\\\\nimport carthage.gallery.shared.generated.resources.*|g' -e 's|import androidx.compose.ui.tooling.preview.Preview|import org.jetbrains.compose.ui.tooling.preview.Preview|g' -e 's|R\\\\.string\\\\.|Res.string.|g' {} +)",
+      "Bash(./gradlew :foundations:tasks --all)",
+      "Bash(./gradlew :foundations:compileCommonMainKotlinMetadata :components:compileCommonMainKotlinMetadata)",
+      "Bash(./gradlew :foundations:compileCommonMainKotlinMetadata)",
+      "Bash(./gradlew :foundations:compileCommonMainKotlinMetadata --info)"
+    ]
+  }
+}
