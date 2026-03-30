@@ -1,0 +1,89 @@
+package com.github.merkost.mercury.ui.theme
+
+import androidx.compose.runtime.Immutable
+import androidx.compose.ui.graphics.Color
+
+@Immutable
+data class MercuryColorScheme(
+    val background: Color,
+    val surface: Color,
+    val surfaceRaised: Color,
+    val surfaceHover: Color,
+    val surfacePressed: Color,
+    val surfaceRecessed: Color,
+    val border: Color,
+    val borderSubtle: Color,
+    val borderFocus: Color,
+    val textPrimary: Color,
+    val textSecondary: Color,
+    val textMuted: Color,
+    val textInverse: Color,
+    val accent: Color,
+    val accentSubtle: Color,
+    val error: Color,
+    val errorSurface: Color,
+    val diffAdd: Color,
+    val diffRemove: Color,
+    val diagramCanvas: Color,
+    val diagramNode: Color,
+    val diagramNodeHover: Color,
+    val diagramEdge: Color,
+    val diagramEdgeHighlight: Color,
+    val diagramNodeDimmed: Color
+)
+
+val DarkColorScheme = MercuryColorScheme(
+    background = MercuryPrimitives.gray2,
+    surface = MercuryPrimitives.gray3,
+    surfaceRaised = MercuryPrimitives.gray4,
+    surfaceHover = MercuryPrimitives.gray4,
+    surfacePressed = MercuryPrimitives.gray5,
+    surfaceRecessed = MercuryPrimitives.gray1,
+    border = MercuryPrimitives.gray5,
+    borderSubtle = MercuryPrimitives.gray4,
+    borderFocus = MercuryPrimitives.gray15,
+    textPrimary = MercuryPrimitives.gray13,
+    textSecondary = MercuryPrimitives.gray9,
+    textMuted = MercuryPrimitives.gray7,
+    textInverse = MercuryPrimitives.gray0,
+    accent = MercuryPrimitives.gray15,
+    accentSubtle = MercuryPrimitives.gray11,
+    error = MercuryPrimitives.red,
+    errorSurface = MercuryPrimitives.redDim,
+    diffAdd = MercuryPrimitives.greenDim,
+    diffRemove = MercuryPrimitives.redDim,
+    diagramCanvas = MercuryPrimitives.gray1,
+    diagramNode = MercuryPrimitives.gray3,
+    diagramNodeHover = MercuryPrimitives.gray4,
+    diagramEdge = MercuryPrimitives.gray6,
+    diagramEdgeHighlight = MercuryPrimitives.gray15,
+    diagramNodeDimmed = MercuryPrimitives.gray3.copy(alpha = 0.4f)
+)
+
+val LightColorScheme = MercuryColorScheme(
+    background = MercuryPrimitives.gray14,
+    surface = MercuryPrimitives.gray15,
+    surfaceRaised = MercuryPrimitives.gray15,
+    surfaceHover = MercuryPrimitives.gray13,
+    surfacePressed = MercuryPrimitives.gray12,
+    surfaceRecessed = MercuryPrimitives.gray13,
+    border = MercuryPrimitives.gray11,
+    borderSubtle = MercuryPrimitives.gray12,
+    borderFocus = MercuryPrimitives.gray0,
+    textPrimary = MercuryPrimitives.gray2,
+    textSecondary = MercuryPrimitives.gray8,
+    textMuted = MercuryPrimitives.gray10,
+    textInverse = MercuryPrimitives.gray15,
+    accent = MercuryPrimitives.gray0,
+    accentSubtle = MercuryPrimitives.gray2,
+    error = MercuryPrimitives.redLight,
+    errorSurface = MercuryPrimitives.redLightSurface,
+    diffAdd = MercuryPrimitives.gray12,
+    diffRemove = MercuryPrimitives.redLightSurface,
+    diagramCanvas = MercuryPrimitives.gray14,
+    diagramNode = MercuryPrimitives.gray15,
+    diagramNodeHover = MercuryPrimitives.gray13,
+    diagramEdge = MercuryPrimitives.gray9,
+    diagramEdgeHighlight = MercuryPrimitives.gray0,
+    diagramNodeDimmed = MercuryPrimitives.gray15.copy(alpha = 0.4f)
+)

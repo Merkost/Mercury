@@ -32,7 +32,10 @@
       "Bash(./gradlew :foundations:tasks --all)",
       "Bash(./gradlew :foundations:compileCommonMainKotlinMetadata :components:compileCommonMainKotlinMetadata)",
       "Bash(./gradlew :foundations:compileCommonMainKotlinMetadata)",
-      "Bash(./gradlew :foundations:compileCommonMainKotlinMetadata --info)"
+      "Bash(./gradlew :foundations:compileCommonMainKotlinMetadata --info)",
+      "Bash(mkdir -p /Users/merkost/AndroidStudioProjects/Mercury/.claude/skills/kotlin-clean-code)",
+      "Bash(cp /Users/merkost/.claude/skills/kotlin-clean-code/SKILL.md /Users/merkost/AndroidStudioProjects/Mercury/.claude/skills/kotlin-clean-code/SKILL.md)",
+      "Bash(rm -rf /Users/merkost/.claude/skills/kotlin-clean-code)"
     ]
   }
 }

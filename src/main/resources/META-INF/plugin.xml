@@ -1,15 +1,23 @@
-<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.merkost.mercury</id>
     <name>Mercury</name>
     <vendor>merkost</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java</depends>
+    <depends>org.jetbrains.kotlin</depends>
 
-    <resource-bundle>messages.MyBundle</resource-bundle>
+    <resource-bundle>messages.MercuryBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.merkost.mercury.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
-        <postStartupActivity implementation="com.github.merkost.mercury.startup.MyProjectActivity" />
+        <toolWindow
+            factoryClass="com.github.merkost.mercury.ui.toolwindow.MercuryToolWindowFactory"
+            id="Mercury"
+            anchor="right"
+            icon="AllIcons.Nodes.DataTables"
+        />
+        <projectService
+            serviceImplementation="com.github.merkost.mercury.services.MercuryProjectService"
+        />
     </extensions>
 </idea-plugin>
