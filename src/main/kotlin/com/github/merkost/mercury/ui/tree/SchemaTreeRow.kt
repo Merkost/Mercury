@@ -177,7 +177,7 @@ private fun RowScope.ColumnRow(node: SchemaTreeNode.Column) {
         modifier = Modifier.weight(0.35f)
     )
     Text(
-        text = if (col.typeConverter != null) "${col.typeConverter!!.fromType}\u2192${col.typeConverter!!.toType}" else col.type,
+        text = if (col.typeConverter != null) "${col.typeConverter.fromType}\u2192${col.typeConverter.toType}" else col.type,
         style = typography.codeMedium,
         color = colors.textSecondary,
         modifier = Modifier.weight(0.3f)
