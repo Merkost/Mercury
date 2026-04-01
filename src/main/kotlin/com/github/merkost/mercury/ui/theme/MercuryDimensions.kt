@@ -24,9 +24,10 @@ object MercurySize {
     val iconMd = 16.dp
     val iconLg = 20.dp
     val treeIndent = 16.dp
-    val treeRowHeight = 28.dp
-    val entityCardMinWidth = 180.dp
-    val entityCardMaxWidth = 280.dp
+    val treeRowHeight = 32.dp
+    val sectionHeaderHeight = 40.dp
+    val entityCardMinWidth = 200.dp
+    val entityCardMaxWidth = 320.dp
     val entityCardPadding = 12.dp
     val entityFieldHeight = 24.dp
     val relationshipLineWidth = 1.dp

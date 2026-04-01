@@ -5,8 +5,10 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 
+private val DefaultTypography = mercuryTypography()
+
 val LocalMercuryColors = staticCompositionLocalOf { DarkColorScheme }
-val LocalMercuryTypography = staticCompositionLocalOf { mercuryTypography() }
+val LocalMercuryTypography = staticCompositionLocalOf { DefaultTypography }
 
 object MercuryTheme {
     val colors: MercuryColorScheme
@@ -26,11 +28,10 @@ fun MercuryTheme(
     content: @Composable () -> Unit
 ) {
     val colorScheme = if (isDark) DarkColorScheme else LightColorScheme
-    val typography = mercuryTypography()
 
     CompositionLocalProvider(
         LocalMercuryColors provides colorScheme,
-        LocalMercuryTypography provides typography,
+        LocalMercuryTypography provides DefaultTypography,
         content = content
     )
 }

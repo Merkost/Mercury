@@ -2,4 +2,7 @@
 .idea
 .intellijPlatform
 .qodana
+.kotlin
 build
+/docs
+.superpowers/

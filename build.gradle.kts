@@ -40,6 +40,8 @@ dependencies {
     testImplementation(libs.junit)
     testImplementation(libs.opentest4j)
 
+    implementation(libs.kotlinx.serialization.json)
+
     implementation(libs.jewel.ide.laf.bridge) {
         exclude(group = "org.jetbrains.kotlinx")
     }

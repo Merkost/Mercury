@@ -4,8 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.Saver
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
 
@@ -60,12 +59,7 @@ class MercuryNavigator(
 fun rememberMercuryNavigator(
     initialDatabaseId: String = ""
 ): MercuryNavigator {
-    return rememberSaveable(
-        saver = Saver(
-            save = { initialDatabaseId },
-            restore = { dbId -> MercuryNavigator(MercuryDestination.Tab.Schema(dbId)) }
-        )
-    ) {
+    return remember(initialDatabaseId) {
         MercuryNavigator(MercuryDestination.Tab.Schema(initialDatabaseId))
     }
 }
