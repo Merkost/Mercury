@@ -40,6 +40,7 @@
       "Bash(find /Users/merkost/.claude/skills/kotlin-clean-code-workspace/iteration-1/eval-*/with_skill/outputs/ -name \"*.kt\")",
       "Bash(find /Users/merkost/.claude/skills/kotlin-clean-code-workspace/iteration-1/eval-*/without_skill/outputs/ -name \"*.kt\" -exec cat {})",
       "Bash(find /Users/merkost/.claude/skills/kotlin-clean-code-workspace/iteration-1/eval-*/without_skill/outputs/ -name \"*.kt\")"
+      "Bash(./gradlew :foundations:compileCommonMainKotlinMetadata --info)"
     ]
   }
 }
