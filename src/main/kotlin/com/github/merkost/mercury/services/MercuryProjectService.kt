@@ -70,10 +70,10 @@ class MercuryProjectService(private val project: Project) : Disposable {
                     if (currentState is MercuryUiState.Refreshing) {
                         _uiState.value = MercuryUiState.Populated(currentState.currentSchema)
                     } else if (currentState is MercuryUiState.Loading) {
-                        _uiState.value = if (previousSchema.databases.isEmpty()) {
-                            MercuryUiState.Empty
+                        if (!hasEverFoundDatabases) {
+                            scheduleRetry()
                         } else {
-                            MercuryUiState.Populated(previousSchema)
+                            _uiState.value = MercuryUiState.Populated(previousSchema)
                         }
                     }
                 }

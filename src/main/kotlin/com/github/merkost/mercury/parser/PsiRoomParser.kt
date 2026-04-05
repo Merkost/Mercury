@@ -198,17 +198,10 @@ class PsiRoomParser(private val project: Project) {
         val lightClass = ktClass.toLightClass()
         if (lightClass != null) {
             val result = entityParser.parse(lightClass)
-            if (result != null) {
-                log.info("Mercury: FK debug - entity '${result.name}' has ${result.foreignKeys.size} FKs: ${result.foreignKeys.map { "parent=${it.parentEntity}, child=${it.childColumns}" }}")
-            }
             if (result != null && result.foreignKeys.isEmpty()) {
                 val annotation = ktClass.findAnnotation("Entity")
                 if (annotation != null) {
-                    log.info("Mercury: FK debug - entity '${ktClass.name}' has @Entity annotation, attempting FK extraction")
-                    val allArgs = annotation.valueArgumentList?.arguments?.map { "${it.getArgumentName()?.asName}" } ?: emptyList()
-                    log.info("Mercury: FK debug - @Entity args: $allArgs")
                     val ktForeignKeys = extractForeignKeysFromKt(annotation)
-                    log.info("Mercury: FK debug - extracted ${ktForeignKeys.size} FKs for '${ktClass.name}'")
                     if (ktForeignKeys.isNotEmpty()) {
                         return result.copy(foreignKeys = ktForeignKeys)
                     }
@@ -295,28 +288,17 @@ class PsiRoomParser(private val project: Project) {
     private fun extractForeignKeysFromKt(entityAnnotation: KtAnnotationEntry): List<ForeignKeyInfo> {
         val fkArgs = entityAnnotation.valueArgumentList?.arguments
             ?.find { it.getArgumentName()?.asName?.asString() == "foreignKeys" }
-        if (fkArgs == null) {
-            log.info("Mercury: FK debug - no 'foreignKeys' argument found in @Entity")
-            return emptyList()
-        }
+            ?: return emptyList()
 
-        val expr = fkArgs.getArgumentExpression()
-        if (expr == null) {
-            log.info("Mercury: FK debug - foreignKeys argument has no expression")
-            return emptyList()
-        }
-        log.info("Mercury: FK debug - foreignKeys expr type: ${expr.javaClass.simpleName}, text: ${expr.text.take(100)}")
+        val expr = fkArgs.getArgumentExpression() ?: return emptyList()
 
         val collector = expr as? KtCollectionLiteralExpression
         if (collector == null) {
-            log.info("Mercury: FK debug - expr is NOT KtCollectionLiteralExpression, trying children")
             val innerExprs = expr.children.mapNotNull { it as? KtExpression }
-            log.info("Mercury: FK debug - found ${innerExprs.size} child expressions: ${innerExprs.map { it.javaClass.simpleName }}")
             return innerExprs.mapNotNull { parseFkExpression(it) }
         }
 
         val inner = collector.getInnerExpressions()
-        log.info("Mercury: FK debug - collection has ${inner.size} inner expressions: ${inner.map { it.javaClass.simpleName }}")
 
         return inner.mapNotNull { fkExpr ->
             parseFkExpression(fkExpr)
@@ -324,14 +306,10 @@ class PsiRoomParser(private val project: Project) {
     }
 
     private fun parseFkExpression(fkExpr: KtExpression): ForeignKeyInfo? {
-        log.info("Mercury: FK debug - parsing FK expr type: ${fkExpr.javaClass.simpleName}")
         val args = when (fkExpr) {
             is KtCallExpression -> fkExpr.valueArgumentList?.arguments
             is KtAnnotationEntry -> fkExpr.valueArgumentList?.arguments
-            else -> {
-                log.info("Mercury: FK debug - unknown expr type: ${fkExpr.javaClass.simpleName}, text: ${fkExpr.text.take(80)}")
-                null
-            }
+            else -> null
         } ?: return null
 
         val entityRef = args.find { it.getArgumentName()?.asName?.asString() == "entity" }

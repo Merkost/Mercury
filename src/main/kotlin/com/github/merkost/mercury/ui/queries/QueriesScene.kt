@@ -54,6 +54,28 @@ fun QueriesScene(
         database.entities.associateBy { it.tableName }
     }
 
+    if (filteredDaos.isEmpty() && searchQuery.isNotEmpty()) {
+        Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            Text(
+                text = "No matching queries",
+                style = MercuryTheme.typography.bodyMedium,
+                color = MercuryTheme.colors.textMuted
+            )
+        }
+        return
+    }
+
+    if (filteredDaos.isEmpty()) {
+        Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            Text(
+                text = "No DAOs found",
+                style = MercuryTheme.typography.bodyMedium,
+                color = MercuryTheme.colors.textMuted
+            )
+        }
+        return
+    }
+
     LazyColumn(modifier = modifier.fillMaxSize()) {
         for (dao in filteredDaos) {
             item(key = "dao:${dao.qualifiedName}") {

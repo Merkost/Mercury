@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.github.merkost.mercury</id>
     <name>Mercury</name>
-    <vendor>merkost</vendor>
+    <vendor email="merkostdev@gmail.com" url="https://github.com/Merkost">merkost</vendor>
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.java</depends>
@@ -18,7 +18,7 @@
             factoryClass="com.github.merkost.mercury.ui.toolwindow.MercuryToolWindowFactory"
             id="Mercury"
             anchor="right"
-            icon="AllIcons.Nodes.DataTables"
+            icon="/icons/mercury.svg"
         />
         <projectService
             serviceImplementation="com.github.merkost.mercury.services.MercuryProjectService"
