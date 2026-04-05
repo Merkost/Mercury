@@ -2,4 +2,9 @@
 .idea
 .intellijPlatform
 .qodana
+.kotlin
 build
+/docs
+.superpowers/
+local.properties
+.claude/
