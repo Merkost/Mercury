@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.SolidColor
+import com.github.merkost.mercury.MercuryBundle
 import com.github.merkost.mercury.ui.theme.MercuryMotion
 import com.github.merkost.mercury.ui.theme.MercurySize
 import com.github.merkost.mercury.ui.theme.MercurySpacing
@@ -26,7 +27,7 @@ import org.jetbrains.jewel.ui.component.Text
 fun MercurySearchField(
     query: String,
     onQueryChange: (String) -> Unit,
-    placeholder: String = "Search entities, fields, queries...",
+    placeholder: String = MercuryBundle.message("search.placeholder"),
     modifier: Modifier = Modifier
 ) {
     val colors = MercuryTheme.colors

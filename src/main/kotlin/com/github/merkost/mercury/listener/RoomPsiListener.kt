@@ -13,7 +13,7 @@ class RoomPsiListener(
     private val service: MercuryProjectService
 ) : PsiTreeChangeAdapter() {
 
-    private val alarm = Alarm(Alarm.ThreadToUse.POOLED_THREAD, service)
+    private val alarm = Alarm(Alarm.ThreadToUse.SWING_THREAD, service)
 
     fun register(parentDisposable: Disposable) {
         PsiManager.getInstance(project).addPsiTreeChangeListener(this, parentDisposable)

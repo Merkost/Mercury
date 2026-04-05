@@ -3,6 +3,7 @@ package com.github.merkost.mercury.ui.diagram
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
@@ -11,6 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.key.*
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
@@ -35,6 +38,11 @@ fun DiagramScene(
 ) {
     val colors = MercuryTheme.colors
     val density = LocalDensity.current
+    val focusRequester = remember { FocusRequester() }
+
+    LaunchedEffect(Unit) {
+        focusRequester.requestFocus()
+    }
     val entitySizes = remember { mutableStateMapOf<String, Pair<Float, Float>>() }
     var containerSize by remember { mutableStateOf(IntSize.Zero) }
 
@@ -85,6 +93,8 @@ fun DiagramScene(
     Column(
         modifier = modifier
             .fillMaxSize()
+            .focusRequester(focusRequester)
+            .focusable()
             .onKeyEvent { event ->
                 when {
                     event.type == KeyEventType.KeyDown && event.key == Key.Escape -> {

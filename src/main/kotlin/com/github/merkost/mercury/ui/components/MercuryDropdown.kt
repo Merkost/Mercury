@@ -14,6 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.key.*
 import androidx.compose.ui.window.Popup
 import com.github.merkost.mercury.ui.theme.MercuryMotion
@@ -34,6 +36,11 @@ fun MercuryDropdown(
     var expanded by remember { mutableStateOf(false) }
     var isHovered by rememberHoverState()
     var focusedIndex by remember { mutableStateOf(-1) }
+    val focusRequester = remember { FocusRequester() }
+
+    LaunchedEffect(expanded) {
+        if (expanded) focusRequester.requestFocus()
+    }
 
     val triggerBackground by animateColorAsState(
         targetValue = if (isHovered || expanded) colors.surfaceHover else Color.Transparent,
@@ -61,6 +68,7 @@ fun MercuryDropdown(
                 .background(triggerBackground, RoundedCornerShape(MercurySize.radiusMd))
                 .border(MercurySize.borderWidth, colors.border, RoundedCornerShape(MercurySize.radiusMd))
                 .padding(horizontal = MercurySpacing.md, vertical = MercurySpacing.sm)
+                .focusRequester(focusRequester)
                 .onKeyEvent { event ->
                     if (!expanded) return@onKeyEvent false
                     when {

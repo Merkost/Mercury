@@ -24,7 +24,7 @@ class MercuryProjectService(private val project: Project) : Disposable {
     private val _uiState = mutableStateOf<MercuryUiState>(MercuryUiState.Loading)
     private var previousSchema = RoomSchema(databases = emptyList())
     private var hasEverFoundDatabases = false
-    private val retryAlarm = Alarm(Alarm.ThreadToUse.POOLED_THREAD, this)
+    private val retryAlarm = Alarm(Alarm.ThreadToUse.SWING_THREAD, this)
     private var retryCount = 0
 
     val uiState: State<MercuryUiState> get() = _uiState
@@ -72,6 +72,8 @@ class MercuryProjectService(private val project: Project) : Disposable {
                     } else if (currentState is MercuryUiState.Loading) {
                         if (!hasEverFoundDatabases) {
                             scheduleRetry()
+                        } else if (previousSchema.databases.isEmpty()) {
+                            _uiState.value = MercuryUiState.Empty
                         } else {
                             _uiState.value = MercuryUiState.Populated(previousSchema)
                         }

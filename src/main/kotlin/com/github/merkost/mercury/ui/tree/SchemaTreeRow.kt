@@ -5,6 +5,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -12,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import com.github.merkost.mercury.ui.components.onHoverChanged
 import com.github.merkost.mercury.ui.components.rememberHoverState
@@ -70,7 +72,12 @@ fun SchemaTreeRow(
                 }
             }
             .onHoverChanged { isHovered = it }
-            .clickable(onClick = onClick)
+            .pointerInput(Unit) {
+                detectTapGestures(
+                    onTap = { onClick() },
+                    onDoubleTap = { onDoubleClick() }
+                )
+            }
             .padding(horizontal = MercurySpacing.sm)
             .padding(start = (node.depth * MercurySize.treeIndent.value).dp),
         verticalAlignment = Alignment.CenterVertically

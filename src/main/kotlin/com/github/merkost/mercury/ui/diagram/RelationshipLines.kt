@@ -1,9 +1,11 @@
 package com.github.merkost.mercury.ui.diagram
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
@@ -35,10 +37,23 @@ fun RelationshipLines(
 
     val defaultWidth = MercurySize.entityCardMaxWidth.value
     val defaultHeight = 200f
+    val gridColor = colors.borderSubtle.copy(alpha = 0.3f)
 
-    Canvas(modifier = modifier.fillMaxSize()) {
-        drawGridDots(colors.borderSubtle.copy(alpha = 0.3f), 32f)
+    Box(modifier = modifier.fillMaxSize()) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .drawWithCache {
+                    val dots = buildGridDots(size, 32f)
+                    onDrawBehind {
+                        for (dot in dots) {
+                            drawCircle(gridColor, radius = 1f, center = dot)
+                        }
+                    }
+                }
+        )
 
+        Canvas(modifier = Modifier.fillMaxSize()) {
         for (edge in edges) {
             val childPos = entityPositions[edge.childQualifiedName] ?: continue
             val parentPos = entityPositions[edge.parentQualifiedName] ?: continue
@@ -99,15 +114,18 @@ fun RelationshipLines(
                 lineColor
             )
         }
+        }
     }
 }
 
-private fun DrawScope.drawGridDots(color: Color, spacing: Float) {
+private fun buildGridDots(size: androidx.compose.ui.geometry.Size, spacing: Float): List<Offset> {
     val cols = (size.width / spacing).toInt() + 1
     val rows = (size.height / spacing).toInt() + 1
-    for (row in 0..rows) {
-        for (col in 0..cols) {
-            drawCircle(color, radius = 1f, center = Offset(col * spacing, row * spacing))
+    return buildList(cols * rows) {
+        for (row in 0..rows) {
+            for (col in 0..cols) {
+                add(Offset(col * spacing, row * spacing))
+            }
         }
     }
 }
