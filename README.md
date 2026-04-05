@@ -2,13 +2,9 @@
 
 ![Build](https://github.com/Merkost/Mercury/workflows/Build/badge.svg)
 
-<p align="center">
-  <img src="src/main/resources/META-INF/pluginIcon.svg" alt="Mercury" width="80"/>
-</p>
+<img src="src/main/resources/META-INF/pluginIcon.svg" alt="Mercury" width="80"/>
 
-<p align="center">
-  <strong>Room Database Schema Visualizer for IntelliJ IDEA & Android Studio</strong>
-</p>
+**Room Database Schema Visualizer for IntelliJ IDEA & Android Studio**
 
 ---
 
